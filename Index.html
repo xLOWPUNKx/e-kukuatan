@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>e-Kekuatan Warga Sekolah</title>
+<meta name="description" content="Dashboard kekuatan Guru & AKP mengikut sesi pagi dan petang.">
+<meta name="theme-color" content="#13111C">
+
+<!-- ✏️ TUKAR 1: pratonton pautan WhatsApp/Telegram — ganti kekuatan.domainanda.com dengan subdomain anda -->
+<meta property="og:title" content="e-Kekuatan Warga Sekolah">
+<meta property="og:description" content="Dashboard kekuatan Guru & AKP · Sesi Pagi & Petang">
+<meta property="og:type" content="website">
+<meta property="og:image" content="https://kekuatan.smksp.site/preview.png">
+
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%23FF3366'/%3E%3Cstop offset='1' stop-color='%233A86EF'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='64' height='64' rx='16' fill='url(%23g)'/%3E%3Crect x='14' y='34' width='8' height='16' rx='2' fill='%23fff'/%3E%3Crect x='28' y='22' width='8' height='28' rx='2' fill='%23fff'/%3E%3Crect x='42' y='28' width='8' height='22' rx='2' fill='%23FFBE0B'/%3E%3C/svg%3E">
+<style>
+  html,body{margin:0;height:100%;background:#13111C;font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;color:#F8F9FA;overflow:hidden}
+  #app{position:fixed;inset:0;width:100%;height:100%;border:0;display:block}
+  #muat{position:fixed;inset:0;display:grid;place-items:center;text-align:center;z-index:2;transition:opacity .5s;
+    background:radial-gradient(700px 480px at 12% 8%,rgba(255,51,102,.22),transparent 62%),radial-gradient(800px 520px at 92% 30%,rgba(58,134,239,.24),transparent 62%),linear-gradient(160deg,#13111C,#1B263B)}
+  #muat.hilang{opacity:0;pointer-events:none}
+  .logo{width:72px;height:72px;margin:0 auto 18px;border-radius:20px;background:linear-gradient(135deg,#FF3366,#3A86EF);display:grid;place-items:center;box-shadow:0 10px 40px rgba(58,134,239,.35)}
+  h1{font-size:22px;margin:0 0 6px}
+  p{margin:0;opacity:.7;font-size:14px}
+  .spin{width:30px;height:30px;border:3px solid rgba(255,255,255,.15);border-top-color:#3A86EF;border-radius:50%;margin:22px auto 0;animation:sp 1s linear infinite}
+  @keyframes sp{to{transform:rotate(360deg)}}
+  #bantu{position:fixed;left:50%;bottom:18px;transform:translateX(-50%);z-index:3;display:none;max-width:min(560px,92vw);
+    background:rgba(20,20,35,.92);border:1px solid rgba(255,255,255,.15);border-radius:14px;padding:12px 16px;font-size:13.5px;line-height:1.5;box-shadow:0 10px 40px rgba(0,0,0,.4)}
+  #bantu a{color:#a9cbff;font-weight:600}
+  #bantu button{float:right;background:none;border:0;color:#fff;opacity:.6;cursor:pointer;font-size:16px;margin:-4px -6px 0 8px}
+  .setup{max-width:560px;margin:0 auto;padding:30px;text-align:left;line-height:1.6}
+  .setup code{background:rgba(255,255,255,.1);padding:2px 6px;border-radius:5px}
+</style>
+</head>
+<body>
+<div id="muat">
+  <div>
+    <div class="logo"><svg width="38" height="38" viewBox="0 0 64 64"><rect x="10" y="30" width="10" height="22" rx="2" fill="#fff"/><rect x="27" y="14" width="10" height="38" rx="2" fill="#fff"/><rect x="44" y="22" width="10" height="30" rx="2" fill="#FFBE0B"/></svg></div>
+    <h1>e-Kekuatan Warga Sekolah</h1>
+    <p>Memuatkan dashboard…</p>
+    <div class="spin"></div>
+  </div>
+</div>
+<div id="bantu"><button onclick="this.parentNode.style.display='none'" aria-label="Tutup">✕</button>
+  Dashboard mengambil masa lama untuk dipaparkan di sini.
+  <a id="terus" href="#" target="_top">Buka terus →</a><br>
+  <span style="opacity:.7">Pentadbir: pastikan web app Apps Script di-deploy dengan akses <b>Anyone</b>.</span>
+</div>
+
+<script>
+/* ═══════════ ✏️ TUKAR 2: TETAPAN ═══════════ */
+var APPS_SCRIPT_URL = 'https://script.google.com/a/macros/moe-dl.edu.my/s/AKfycbzTPNbF-yyH6MYQgd--XacId44afi2fyZUyolR7o9h--o57lti_Kn4M8wwToZo_vpeU/exec';   /* URL web app Apps Script, berakhir dengan /exec */
+var MOD = 'bingkai';                                   /* 'bingkai' = papar di bawah subdomain anda; 'lencong' = terus ke URL Google */
+/* ═══════════════════════════════════════════ */
+
+(function () {
+  var url = String(APPS_SCRIPT_URL).trim();
+  var ok = /^https:\/\/script\.google\.com\/.+\/exec$/.test(url);
+  if (!ok) {
+    document.getElementById('muat').innerHTML = '<div class="setup"><h1>⚙️ Hampir siap!</h1><p style="opacity:1">Buka fail <code>index.html</code> dalam repositori GitHub ini → klik ✏️ (Edit) → pada baris <code>APPS_SCRIPT_URL</code>, tampal URL web app Apps Script anda (berakhir dengan <code>/exec</code>) → <b>Commit changes</b>. Tunggu 1–2 minit, kemudian muat semula halaman ini.</p></div>';
+    return;
+  }
+  var src = url + location.search;            /* hantar parameter seperti ?tv=1 */
+  document.getElementById('terus').href = src;
+
+  if (MOD === 'lencong') { location.replace(src); return; }
+
+  var f = document.createElement('iframe');
+  f.id = 'app';
+  f.src = src;
+  f.title = 'e-Kekuatan Warga Sekolah';
+  f.setAttribute('allow', 'fullscreen; clipboard-write');
+  f.setAttribute('allowfullscreen', '');
+  document.body.appendChild(f);
+
+  var muat = document.getElementById('muat'), sedia = false;
+  f.addEventListener('load', function () { setTimeout(function () { muat.classList.add('hilang'); }, 400); });
+  setTimeout(function () { muat.classList.add('hilang'); }, 8000);
+  setTimeout(function () { if (!sedia) document.getElementById('bantu').style.display = 'block'; }, 25000);
+
+  /* Mesej daripada dashboard: sedia & mod TV skrin penuh */
+  window.addEventListener('message', function (e) {
+    var h = ''; try { h = new URL(e.origin).hostname; } catch (x) {}
+    if (!/\.googleusercontent\.com$|\.google\.com$/.test(h)) return;
+    var d = e.data || {};
+    if (d.ek === 'ready') {
+      sedia = true;
+      document.getElementById('bantu').style.display = 'none';
+      if (d.tajuk) document.title = 'e-Kekuatan · ' + d.tajuk;
+    }
+    if (d.ek === 'fs') {
+      try {
+        if (d.on && !document.fullscreenElement) document.documentElement.requestFullscreen();
+        if (!d.on && document.fullscreenElement) document.exitFullscreen();
+      } catch (x) {}
+    }
+  });
+})();
+</script>
+</body>
+</html>
